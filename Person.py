@@ -34,7 +34,6 @@ class ServiceProvider(Person):
         return base_price * self.rate_multiplier
 
     def describe(self):
-        print('Test')
         return super().describe() + f" - {self.speciality}"
 
 
