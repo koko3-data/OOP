@@ -12,8 +12,55 @@ class Service:
     
     def info(self):
         return f"{self.name} - {self.duration_min}min -{self.price_quote()} {self.currency}" 
+    
 
+class HaircutService(Service):
+    def __init__(self, name: str, duration_min: int, base_price: float, long_hair: bool = False):
+        super(). __init__(name, duration_min, base_price)
+        self.long_hair = long_hair
 
+class ManicureService(Service):
+    def __init__(self, name: str, duration_min: int, base_price: float, gel: bool = False):
+        super(). __init__(name, duration_min, base_price)
+        self.gel= gel
+    
+    def price_quote(self):
+        if self.gel:
+            return super() . price_quote() + 20.0
+        else:
+            return super() . price_quote()
+
+class MassageService(Service):
+    def __init__(self, name: str, duration_min: int, base_price: float, deep_tissue: bool = False):
+        super(). __init__(name, duration_min, base_price)
+        self.deep_tissue = deep_tissue
+
+    def price_quote(self):
+        if self.deep_tissue:
+            return super() . price_quote() * 1.2
+        else:
+            return super() . price_quote()
+
+class TherapyService(Service):
+    pass
+        
+  
 
 # Lola_service = Service("Lola", 60, 200.0)
 # print(Lola_service.info())
+
+# Lola_haircut = HaircutService("Lola Haircut", 45, 150.0)
+# print(Lola_haircut.price_quote())
+# print(Lola_haircut.info())
+
+# Lola_Mani = ManicureService("Lola Manicure", 30, 100.0, gel=False)
+# print(Lola_Mani.price_quote())
+# print(Lola_Mani.info())
+
+# lola_massage = MassageService("Lola Massage", 90, 300.0, deep_tissue=True)
+# print(lola_massage.price_quote())
+# print(lola_massage.info())
+
+# lola_therapy = TherapyService("Lola Therapy", 60, 250.0)
+# print(lola_therapy.price_quote())
+# print(lola_therapy.info())

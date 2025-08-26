@@ -4,7 +4,7 @@ class Person:
         self.phone = phone
 
     def describe(self):
-        return f"{self.name} - {self.phone}"
+        return f"{self.name}  ({self.phone})"
 
 class Client(Person):
     def __init__(self,name:str,phone:str,wallet:float):
@@ -22,6 +22,24 @@ class Client(Person):
             # return {"status": False, "message": "Insufficient funds", "balance": self.wallet}
         
 
+class ServiceProvider(Person):
+    def __init__ (self, name :str , phone : str, speciality :str , rate_multiplier : float = 1.0):
+        super().__init__(name,phone)
+        self.speciality = speciality
+        self.rate_multiplier = rate_multiplier
+
+    def rate_price(self,base_price:float):
+        #you are not using self.amount here because you don't need amount stored  in the object . You just need to use it to calculate the rate price
+        #The value for amount is temporary and only used within the method
+        return base_price * self.rate_multiplier
+
+    def describe(self):
+        return super().describe() + f" - {self.speciality}"
+
 
 # Omolola = Client("Omolola","1234567890",700.0)
 # print(Omolola.pay(600.0))
+
+# Tola = ServiceProvider("Tola","+4887654321","Therapist",1.7)
+# print(Tola.rate_price(200.0))
+# print(Tola.describe())
