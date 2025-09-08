@@ -18,6 +18,12 @@ class HaircutService(Service):
     def __init__(self, name: str, duration_min: int, base_price: float, long_hair: bool = False):
         super(). __init__(name, duration_min, base_price)
         self.long_hair = long_hair
+    
+    def price_quote(self):
+        if self.long_hair:
+            return super() . price_quote() + 30.0
+        else:
+            return super() . price_quote()
 
 class ManicureService(Service):
     def __init__(self, name: str, duration_min: int, base_price: float, gel: bool = False):

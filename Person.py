@@ -21,7 +21,7 @@ class Client(Person):
             return False
             # return {"status": False, "message": "Insufficient funds", "balance": self.wallet}
         
-
+platform_fee = 2
 class ServiceProvider(Person):
     def __init__ (self, name :str , phone : str, speciality :str , rate_multiplier : float = 1.0):
         super().__init__(name,phone)
@@ -31,7 +31,7 @@ class ServiceProvider(Person):
     def rate_price(self,base_price:float):
         #you are not using self.amount here because you don't need amount stored  in the object . You just need to use it to calculate the rate price
         #The value for amount is temporary and only used within the method
-        return base_price * self.rate_multiplier
+        return (base_price * self.rate_multiplier)+ platform_fee
 
     def describe(self):
         return super().describe() + f" - {self.speciality}"
