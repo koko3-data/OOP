@@ -6,10 +6,17 @@ class Person:
     def describe(self):
         return f"{self.name}  ({self.phone})"
 
+
+all_clients : list = []
 class Client(Person):
     def __init__(self,name:str,phone:str,wallet:float):
         super().__init__(name,phone)
         self.wallet = wallet
+        
+        all_clients.append(self)
+
+    def list_all(cls):
+        return [client.describe() for client in all_clients]
     
     def pay(self,amount :float):
         if amount  <= self.wallet:
@@ -20,6 +27,7 @@ class Client(Person):
             self.wallet = self.wallet
             return False
             # return {"status": False, "message": "Insufficient funds", "balance": self.wallet}
+
         
 platform_fee = 2
 class ServiceProvider(Person):
