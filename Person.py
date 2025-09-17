@@ -7,30 +7,29 @@ class Person:
         return f"{self.name}  ({self.phone})"
 
 
-all_clients : list = []
+
 class Client(Person):
+    all_clients : list = []
+
     def __init__(self,name:str,phone:str,wallet:float):
         super().__init__(name,phone)
         self.wallet = wallet
         
-        all_clients.append(self)
-
-    def list_all(cls):
-        return [client.describe() for client in all_clients]
+        Client.all_clients.append(self)
     
-    def pay(self,amount :float):
-        if amount  <= self.wallet:
-            self.wallet =  self.wallet - amount
-            return True
-            # return {"status": True, "message": "Payment successful", "balance": self.wallet}
-        else:
-            self.wallet = self.wallet
-            return False
-            # return {"status": False, "message": "Insufficient funds", "balance": self.wallet}
+    @classmethod
+    def list_all(cls):
+        return [client.describe() for client in cls.all_clients]
+    
+  
+    
+    def describe(self):
+        return super().describe() + f" - Wallet Balance: {self.wallet}"
 
         
-platform_fee = 2
+
 class ServiceProvider(Person):
+    platform_fee = 2
     def __init__ (self, name :str , phone : str, speciality :str , rate_multiplier : float = 1.0):
         super().__init__(name,phone)
         self.speciality = speciality
@@ -39,7 +38,7 @@ class ServiceProvider(Person):
     def rate_price(self,base_price:float):
         #you are not using self.amount here because you don't need amount stored  in the object . You just need to use it to calculate the rate price
         #The value for amount is temporary and only used within the method
-        return (base_price * self.rate_multiplier)+ platform_fee
+        return (base_price * self.rate_multiplier)+ self.platform_fee
 
     def describe(self):
         return super().describe() + f" - {self.speciality}"
