@@ -28,7 +28,7 @@ class Booking:
 
 
     def confirm_booking(self):
-       user_input = input(f"Will you like to pay for service now ? (yes/no): ").strip().lower()
+       user_input = input(f"Will you like to pay for {self.service.name} with {self.provider.name} now ? (yes/no): ").strip().lower()
        if user_input == 'yes':
           
            if self.pay(self.total_price()) == True:
@@ -51,16 +51,16 @@ class Booking:
         messages = []
         for booking in Booking.all_bookings:
             if booking.confirmed:
-                messages.append(f"Booking confirmed: {booking.service.name} with {booking.provider.name} at {booking.timeslot} for {booking.total_price()} {booking.service.currency} via {booking.source}.")
+                messages.append(f"Booking confirmed: {booking.service.name} with {booking.provider.name} for {booking.client.name} at {booking.timeslot} for {booking.total_price()} {booking.service.currency} via {booking.source}.")
         return messages
 
     def cancel_booking(self,confirm_booking: bool = True):
         if self.confirmed == True :
-            user_input = input(f'Are you sure you want to cancel booking? (yes/no):').strip().lower()
+            user_input = input(f'Are you sure you want to cancel booking for {self.service.name} with {self.provider.name} ? (yes/no):').strip().lower()
             if user_input == 'yes' :
                 refund_amount = 0.9 * self.total_price()
                 self.client.wallet += refund_amount
-                return f"Booking cancelled. Refund of {refund_amount} {self.service.currency} processed. New wallet balance: {self.client.wallet} {self.service.currency}."
+                return f"Booking cancelled. Refund of {refund_amount} {self.service.currency} processed for {self.client.name} with {self.provider.name}. New wallet balance: {self.client.wallet} {self.service.currency}."
             else:
                 return "Cancellation aborted. Booking remains active."
         else:
