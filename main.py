@@ -29,7 +29,9 @@ booking_confirmation3 = booking3.confirm_booking()
 # print(booking3.cancel_booking())
 
 
-print(Client.list_all())
+# print(Client.list_all())
+
+print(Booking.process_booking())
 # print(([booking1],[booking2],[booking3]).process_booking())
 
 # cl4 = Client()

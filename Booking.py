@@ -3,6 +3,7 @@ from Service import Service
 
 
 class Booking:
+    all_bookings : list = []
     source_default = "SalonBooker"
     def __init__(self, client: Client, provider: ServiceProvider, service: Service, timeslot: str, source: str = None):
         self.client = client
@@ -10,6 +11,7 @@ class Booking:
         self.service = service
         self.timeslot = timeslot
         self.source = source if source else self.source_default
+        
 
     def total_price(self):
         return self.provider.rate_price(self.service.price_quote())
@@ -30,27 +32,30 @@ class Booking:
        if user_input == 'yes':
           
            if self.pay(self.total_price()) == True:
-               self.confirm_booking = True
-               return f"Booking confirmed: {self.service.name} with {self.provider.name} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source}."
+               self.confirmed = True
+               if self not in Booking.all_bookings: #aviod duplicates appending
+                Booking.all_bookings.append(self)
+                return f"Booking confirmed: {self.service.name} with {self.provider.name} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source}."
            else:
-                self.confirm_booking = False
+                self.confirmed = False
                 return "Booking failed due to insufficient funds."
        else:
-            self.confirm_booking = True
-            return f"Booked {self.service.name} with {self.provider.name} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source} without payment."
+            self.confirmed = True
+            if self not in Booking.all_bookings: #aviod duplicates appending
+                Booking.all_bookings.append(self)
+                return f"Booked {self.service.name} with {self.provider.name} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source} without payment."
     
     
 
-    # def process_booking(bookings : list):
-    #     messages = []
-    #     for object in bookings:
-    #         if hasattr(object, 'confirm_boooking') and callable(object.confirm_boooking):
-    #             messages.append(object.confirm_boooking())
-    #     return messages
-    
+    def process_booking():
+        messages = []
+        for booking in Booking.all_bookings:
+            if booking.confirmed:
+                messages.append(f"Booking confirmed: {booking.service.name} with {booking.provider.name} at {booking.timeslot} for {booking.total_price()} {booking.service.currency} via {booking.source}.")
+        return messages
 
     def cancel_booking(self,confirm_booking: bool = True):
-        if self.confirm_booking == True :
+        if self.confirmed == True :
             user_input = input(f'Are you sure you want to cancel booking? (yes/no):').strip().lower()
             if user_input == 'yes' :
                 refund_amount = 0.9 * self.total_price()
