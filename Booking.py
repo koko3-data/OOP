@@ -20,10 +20,12 @@ class Booking:
         if total_amount <= self.client.wallet :
             self.client.wallet -= total_amount
             print(f"Payment successful. New wallet balance: {self.client.wallet} {self.service.currency}")
-            return True      
+            return True
+                 
         else:
             print(f"Payment failed. Insufficient funds in wallet: {self.client.wallet} {self.service.currency}") 
-            return False   
+            return False
+             
 
 
     def confirm_booking(self):
@@ -34,15 +36,18 @@ class Booking:
                self.confirmed = True
                if self not in Booking.all_bookings: #aviod duplicates appending
                 Booking.all_bookings.append(self)
-                return f"Booking confirmed: {self.service.name} with {self.provider.name} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source}."
+                print (f"Booking confirmed: {self.service.name} with {self.provider.name} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source}.")
+                return True
            else:
                 self.confirmed = False
-                return "Booking failed due to insufficient funds."
+                print ("Booking failed due to insufficient funds.")
+                return False
        else:
             self.confirmed = True
             if self not in Booking.all_bookings: #aviod duplicates appending
                 Booking.all_bookings.append(self)
-                return f"Booked {self.service.name} with {self.provider.name} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source} without payment."
+                print (f"Booked {self.service.name} with {self.provider.name} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source} without payment.")
+                return True
     
     
 
@@ -59,8 +64,11 @@ class Booking:
             if user_input == 'yes' :
                 refund_amount = 0.9 * self.total_price()
                 self.client.wallet += refund_amount
-                return f"Booking cancelled. Refund of {refund_amount} {self.service.currency} processed for {self.client.name} with {self.provider.name}. New wallet balance: {self.client.wallet} {self.service.currency}."
+                print(f"Booking cancelled. Refund of {refund_amount} {self.service.currency} processed for {self.client.name} with {self.provider.name}. New wallet balance: {self.client.wallet} {self.service.currency}.")
+                return refund_amount
             else:
-                return "Cancellation aborted. Booking remains active."
+                print ("Cancellation aborted. Booking remains active.")
+                return 0.0
         else:
-            return "No active booking to cancel."
+            print ("No active booking to cancel.")
+            return 0.0
