@@ -19,34 +19,29 @@ class HaircutService(Service):
         super(). __init__(name, duration_min, base_price)
         self.long_hair = long_hair
     
-    def price_quote(self):
+    def material_cost(self,total_price: float):
         if self.long_hair:
-            return super() . price_quote() + 30.0
-        else:
-            return super() . price_quote()
+            return total_price +  30.0
 
 class ManicureService(Service):
     def __init__(self, name: str, duration_min: int, base_price: float, gel: bool = False):
         super(). __init__(name, duration_min, base_price)
         self.gel= gel
     
-    def price_quote(self):
+    def material_cost(self, total_price: float):
         if self.gel:
-            return super() . price_quote() + 20.0
-        else:
-            return super() . price_quote()
+            return total_price + 20.0
+
 
 class MassageService(Service):
     def __init__(self, name: str, duration_min: int, base_price: float, deep_tissue: bool = False):
         super(). __init__(name, duration_min, base_price)
         self.deep_tissue = deep_tissue
 
-    def price_quote(self):
+    def material_cost(self, total_price: float):
         if self.deep_tissue:
-            return super() . price_quote() * 1.2
-        else:
-            return super() . price_quote()
-
+            return  total_price * 1.2
+       
 class TherapyService(Service):
     pass
         

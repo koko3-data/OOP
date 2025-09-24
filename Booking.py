@@ -14,10 +14,9 @@ class Booking:
         
 
     def total_price(self):
-        return self.provider.rate_price(self.service.price_quote())
+        return self.service.material_cost(self.provider.rate_price(self.service.price_quote()))
     
     def pay(self,total_amount: float):
-        total_amount = self.total_price()
         if total_amount <= self.client.wallet :
             self.client.wallet -= total_amount
             print(f"Payment successful. New wallet balance: {self.client.wallet} {self.service.currency}")
