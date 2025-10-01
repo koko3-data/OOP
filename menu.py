@@ -1,4 +1,5 @@
 from Person import Client, ServiceProvider
+from Service import Service,ManicureService,HaircutService,MassageService,TherapyService
 
 
 def menu():
@@ -6,14 +7,15 @@ def menu():
         print("Welcome to SaloonBooker!")
         print("1. Add client : ")
         print("2. Register Service Provider: ")
-        print("3. Make Booking: ")
-        print("4. Confirm Booking: ")
-        print("5. Cancel Booking: ")
-        print("6.View Payment status: ")
-        print("7. List all clients: ")
-        print("8. List all Service Providers: ")
-        print("9. List all Services")
-        print("10. Quit: ")
+        print("3. Add Service: ")
+        print("4. Make Booking: ")
+        print("5. Confirm Booking: ")
+        print("6. Cancel Booking: ")
+        print("7.View Payment status: ")
+        print("8. List all clients: ")
+        print("9. List all Service Providers: ")
+        print("10. List all Services")
+        print("11. Quit: ")
         
         choice = input("Enter your choice (1 - 10) : ")
         if choice == '1':
@@ -35,7 +37,41 @@ def menu():
             print(f"Service Provider: {provider.describe()} registered successfully.")
             return provider.describe()
         
-        # elif choice == '3':
+        elif choice == '3':
+           name = input("Enter service name: ")
+           duration_min = int(input("Enter service duration in minutes: "))
+           base_price = float(input("Enter service base price: "))
+           print("Select service type:")
+           print("1. Haircut Service")
+           print("2. Manicure Service")
+           print("3. Massage Service")
+           print("4. Therapy Service")
+           service_type = input("Enter your choice (1-4): ")
+           if service_type == '1':
+              long_hair = input("Is it for long hair? (yes/no): ").strip().lower() == 'yes'
+              service = HaircutService(name, duration_min, base_price, long_hair)
+           
+           elif service_type == '2':
+              gel = input("Does it include gel? (yes/no): ").strip().lower() == 'yes'
+              service = ManicureService(name, duration_min, base_price, gel)
+
+           elif service_type == '3':
+             deep_tissue = input("Is it a deep tissue massage? (yes/no): ").strip().lower() == 'yes'
+             service = MassageService(name, duration_min, base_price, deep_tissue)
+
+           elif service_type == '4':
+             service = TherapyService(name, duration_min, base_price)
+              
+        #  
+             
+
+            
+        
+              
+    
+            
+        
+           
            
             
             
