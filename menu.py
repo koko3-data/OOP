@@ -34,6 +34,9 @@ def menu():
             provider = ServiceProvider(name, phone, speciality, rate_multiplier)
             print(f"Service Provider: {provider.describe()} registered successfully.")
             return provider.describe()
+        
+        # elif choice == '3':
+           
             
             
         

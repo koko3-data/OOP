@@ -1,3 +1,6 @@
+import json
+import os
+
 class Person:
     def __init__ (self, name: str, phone: str):
         self.name = name
@@ -20,6 +23,14 @@ class Client(Person):
     @classmethod
     def list_all(cls):
         return [client.describe() for client in cls.all_clients]
+    
+    # def save(cls):
+    #     if os.path.exists('clients.json'):
+    #         with open('clients.json', 'r') as file:
+    #             data = json.load(file)
+    #     else:
+    #         data = []
+
     
   
     
