@@ -24,6 +24,9 @@ class HaircutService(Service):
             return total_price +  30.0
         else:
             return total_price
+        
+    def info(self):
+        return self.material_cost((self.total_price) )
 
 class ManicureService(Service):
     def __init__(self, name: str, duration_min: int, base_price: float, gel: bool = False):

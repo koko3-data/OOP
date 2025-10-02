@@ -38,10 +38,7 @@ def menu():
             return provider.describe()
         
         elif choice == '3':
-           name = input("Enter service name: ")
-           duration_min = int(input("Enter service duration in minutes: "))
-           base_price = float(input("Enter service base price: "))
-           print("Select service type:")
+           print("Select available service type:")
            print("1. Haircut Service")
            print("2. Manicure Service")
            print("3. Massage Service")
@@ -49,20 +46,39 @@ def menu():
            service_type = input("Enter your choice (1-4): ")
            if service_type == '1':
               long_hair = input("Is it for long hair? (yes/no): ").strip().lower() == 'yes'
+              name = "Haircut Service"
+              duration_min = int(input("Enter service duration in minutes: "))
+              base_price = float(input("Enter service base price: "))
               service = HaircutService(name, duration_min, base_price, long_hair)
            
            elif service_type == '2':
               gel = input("Does it include gel? (yes/no): ").strip().lower() == 'yes'
+              name = "Manicure Service"
+              duration_min = int(input("Enter service duration in minutes: "))
+              base_price = float(input("Enter service base price: "))
               service = ManicureService(name, duration_min, base_price, gel)
 
            elif service_type == '3':
              deep_tissue = input("Is it a deep tissue massage? (yes/no): ").strip().lower() == 'yes'
+             name = "Massage Service"
+             duration_min = int(input("Enter service duration in minutes: "))
+             base_price = float(input("Enter service base price: "))
              service = MassageService(name, duration_min, base_price, deep_tissue)
 
            elif service_type == '4':
-             service = TherapyService(name, duration_min, base_price)
+              name = "Therapy Service"  
+              duration_min = int(input("Enter service duration in minutes: "))
+              base_price = float(input("Enter service base price: "))
+              service = TherapyService(name, duration_min, base_price)
+
+           else:
+              print("Invalid service type selected")
+              continue
+           print(f"Service: {service.info()} added successfully.")
+           return service.info()
               
-        #  
+              
+   
              
 
             
