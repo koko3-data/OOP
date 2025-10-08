@@ -6,23 +6,23 @@ class Person:
         self.name = name
         self.phone = phone
 
-    def describe(self):
-        return f"{self.name}  ({self.phone})"
+    def __str__(self):
+        return f"Name: {self.name} ,Phone: ({self.phone})"
 
 
 
 class Client(Person):
-    all_clients : list = []
+    # all_clients : list = []
 
     def __init__(self,name:str,phone:str,wallet:float):
         super().__init__(name,phone)
         self.wallet = wallet
         
-        Client.all_clients.append(self)
+    #     Client.all_clients.append(self)
     
-    @classmethod
-    def list_all(cls):
-        return [client.describe() for client in cls.all_clients]
+    # @classmethod
+    # def list_all(cls):
+    #     return [client.describe() for client in cls.all_clients]
     
     # def save(cls):
     #     if os.path.exists('clients.json'):
@@ -34,8 +34,8 @@ class Client(Person):
     
   
     
-    def describe(self):
-        return super().describe() + f" - Wallet Balance: {self.wallet}"
+    def __str__(self):
+        return super().__str__() +  f", Wallet:{self.wallet}"
 
         
 
@@ -51,8 +51,8 @@ class ServiceProvider(Person):
         #The value for amount is temporary and only used within the method
         return (base_price * self.rate_multiplier)+ self.platform_fee
 
-    def describe(self):
-        return super().describe() + f" - {self.speciality}"
+    def __str__(self):
+        return super().__str__() + f",Speciality: {self.speciality}"
 
 
 # Omolola = Client("Omolola","1234567890",700.0)

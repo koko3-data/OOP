@@ -10,8 +10,8 @@ class Service:
     def price_quote(self):
         return self.base_price
     
-    def info(self):
-        return f"{self.name} - {self.duration_min}min -{self.price_quote()} {self.currency}" 
+    def __str__(self):
+        return f"Name: {self.name} , Duration: {self.duration_min}min , Price_Quote: {self.price_quote()} {self.currency}" 
     
 
 class HaircutService(Service):
@@ -24,9 +24,7 @@ class HaircutService(Service):
             return total_price +  30.0
         else:
             return total_price
-        
-    def info(self):
-        return self.material_cost((self.total_price) )
+
 
 class ManicureService(Service):
     def __init__(self, name: str, duration_min: int, base_price: float, gel: bool = False):

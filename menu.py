@@ -1,6 +1,9 @@
 from Person import Client, ServiceProvider
 from Service import Service,ManicureService,HaircutService,MassageService,TherapyService
 
+all_clients = []
+all_providers = []
+all_services = []
 
 def menu():
     while True:
@@ -17,15 +20,17 @@ def menu():
         print("10. List all Services")
         print("11. Quit: ")
         
-        choice = input("Enter your choice (1 - 10) : ")
+        choice = input("Enter your choice (1 - 11) : ")
         if choice == '1':
          name = input("Enter client name: ")
          phone = input("Enter client phone number: ")
          wallet = float(input("Enter client wallet balance: "))
 
          client = Client(name, phone, wallet)
-         print(f"Client: {client.describe()} added successfully.")
-         return client.describe()
+         all_clients.append(client)
+         for client in all_clients:
+          print(f"\033[1;32m' {client} '\033[0m")
+         
 
         elif choice == '2':
             name = input("Enter service provider name: ")
@@ -34,8 +39,11 @@ def menu():
             rate_multiplier = float(input("Enter service provider rate multiplier: "))
 
             provider = ServiceProvider(name, phone, speciality, rate_multiplier)
-            print(f"Service Provider: {provider.describe()} registered successfully.")
-            return provider.describe()
+            all_providers.append(provider)
+            for provider in all_providers:
+             print(f"\033[1;34m' {provider} '\033[0m")
+           
+            
         
         elif choice == '3':
            print("Select available service type:")
@@ -50,6 +58,9 @@ def menu():
               duration_min = int(input("Enter service duration in minutes: "))
               base_price = float(input("Enter service base price: "))
               service = HaircutService(name, duration_min, base_price, long_hair)
+              all_services.append(service)
+              for service in all_services:
+               print(f"\033[1;32m' {service} '\033[0m")
            
            elif service_type == '2':
               gel = input("Does it include gel? (yes/no): ").strip().lower() == 'yes'
@@ -57,6 +68,9 @@ def menu():
               duration_min = int(input("Enter service duration in minutes: "))
               base_price = float(input("Enter service base price: "))
               service = ManicureService(name, duration_min, base_price, gel)
+              all_services.append(service)
+              for service in all_services:
+               print(f"\033[1;32m' {service} '\033[0m")
 
            elif service_type == '3':
              deep_tissue = input("Is it a deep tissue massage? (yes/no): ").strip().lower() == 'yes'
@@ -64,18 +78,29 @@ def menu():
              duration_min = int(input("Enter service duration in minutes: "))
              base_price = float(input("Enter service base price: "))
              service = MassageService(name, duration_min, base_price, deep_tissue)
+             all_services.append(service)
+             for service in all_services:
+               print(f"\033[1;32m' {service} '\033[0m")
 
            elif service_type == '4':
               name = "Therapy Service"  
               duration_min = int(input("Enter service duration in minutes: "))
               base_price = float(input("Enter service base price: "))
               service = TherapyService(name, duration_min, base_price)
+              all_services.append(service)
+              for service in all_services:
+               print(f"\033[1;32m' {service} '\033[0m")
 
            else:
               print("Invalid service type selected")
               continue
-           print(f"Service: {service.info()} added successfully.")
-           return service.info()
+            
+         
+
+        elif choice == '11':
+            print("Thank you for using SaloonBooker. Goodbye!")
+            break
+          
               
               
    
