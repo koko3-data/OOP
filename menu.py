@@ -1,6 +1,6 @@
 from Person import Client, ServiceProvider
 from Service import Service,ManicureService,HaircutService,MassageService,TherapyService
-
+from save import load_clients_csv, save_clients_csv
 all_clients = []
 all_providers = []
 all_services = []
@@ -30,6 +30,7 @@ def menu():
          all_clients.append(client)
          for client in all_clients:
           print(f"\033[1;32m' {client} '\033[0m")
+         save_clients_csv(all_clients)
          
 
         elif choice == '2':
@@ -95,6 +96,10 @@ def menu():
               print("Invalid service type selected")
               continue
             
+        elif choice == '8':
+          all_clients = load_clients_csv('clients.csv')
+          for client in all_clients:
+            print(f"\033[1;35m{client}\033[0m")
          
 
         elif choice == '11':

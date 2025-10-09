@@ -1,9 +1,9 @@
 from Person import Client
-from menu import all_clients
+# from menu import all_clients
 import os
 import csv
 
-def save_clients_csv(filename = 'clients.csv', clients=all_clients):
+def save_clients_csv(clients,filename = 'clients.csv'):
     file_exists  = os.path.exists(filename)
 
 
@@ -18,7 +18,7 @@ def save_clients_csv(filename = 'clients.csv', clients=all_clients):
 def load_clients_csv(filename = 'clients.csv'):
     clients = []
     try:
-        with open(filename, mode='r') as file:
+        with open(filename, mode='r',newline= '') as file:
             reader = csv.reader(file)
             next(reader)  # Skip header row
             for row in reader:
