@@ -60,7 +60,7 @@ def menu():
               service = HaircutService(name, duration_min, base_price, long_hair)
               all_services.append(service)
               for service in all_services:
-               print(f"\033[1;32m' {service} '\033[0m")
+               print(f"\033[1;35m' {service} '\033[0m")
            
            elif service_type == '2':
               gel = input("Does it include gel? (yes/no): ").strip().lower() == 'yes'
@@ -70,7 +70,7 @@ def menu():
               service = ManicureService(name, duration_min, base_price, gel)
               all_services.append(service)
               for service in all_services:
-               print(f"\033[1;32m' {service} '\033[0m")
+               print(f"\033[1;35m' {service} '\033[0m")
 
            elif service_type == '3':
              deep_tissue = input("Is it a deep tissue massage? (yes/no): ").strip().lower() == 'yes'
@@ -80,7 +80,7 @@ def menu():
              service = MassageService(name, duration_min, base_price, deep_tissue)
              all_services.append(service)
              for service in all_services:
-               print(f"\033[1;32m' {service} '\033[0m")
+               print(f"\033[1;35m' {service} '\033[0m")
 
            elif service_type == '4':
               name = "Therapy Service"  
@@ -89,7 +89,7 @@ def menu():
               service = TherapyService(name, duration_min, base_price)
               all_services.append(service)
               for service in all_services:
-               print(f"\033[1;32m' {service} '\033[0m")
+               print(f"\033[1;35m' {service} '\033[0m")
 
            else:
               print("Invalid service type selected")

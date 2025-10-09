@@ -36,6 +36,14 @@ class Client(Person):
     
     def __str__(self):
         return super().__str__() +  f", Wallet:{self.wallet}"
+    
+    def to_csv(self):
+        return [self.name, self.phone, self.wallet]
+    
+    @classmethod
+    def from_csv(cls, row):
+        name,phone,wallet = row
+        return cls(name, phone, float(wallet))
 
         
 
@@ -53,6 +61,15 @@ class ServiceProvider(Person):
 
     def __str__(self):
         return super().__str__() + f",Speciality: {self.speciality}"
+    
+    def to_csv(self):
+        return [self.name, self.phone, self.speciality, self.rate_multiplier]
+    
+    @classmethod
+    def from_csv(cls, row):
+        name,phone,speciality,rate_multiplier = row
+        return cls(name, phone, speciality,float(rate_multiplier))
+
 
 
 # Omolola = Client("Omolola","1234567890",700.0)
