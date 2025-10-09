@@ -6,6 +6,8 @@ all_providers = []
 all_services = []
 
 def menu():
+    global all_clients, all_providers, all_services
+    all_clients = load_clients_csv('clients.csv')  
     while True:
         print("Welcome to SaloonBooker!")
         print("1. Add client : ")
@@ -29,8 +31,10 @@ def menu():
          client = Client(name, phone, wallet)
          all_clients.append(client)
          for client in all_clients:
+          save_clients_csv(client, 'clients.csv')
           print(f"\033[1;32m' {client} '\033[0m")
-         save_clients_csv(all_clients)
+         
+         # save_clients_csv(client, 'clients.csv')
          
 
         elif choice == '2':
