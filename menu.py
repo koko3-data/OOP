@@ -26,7 +26,7 @@ def menu():
         
         choice = input("Enter your choice (1 - 11) : ")
         if choice == '1':
-         name = input("Enter client name: ")
+         name = input("Enter client name: ").lower()
          phone = input("Enter client phone number: ")
          wallet = float(input("Enter client wallet balance: "))
 
@@ -39,7 +39,7 @@ def menu():
          
 
         elif choice == '2':
-            name = input("Enter service provider name: ")
+            name = input("Enter service provider name: ").lower()
             phone = input("Enter service provider phone number: ")
             speciality = input("Enter service provider speciality: ")
             rate_multiplier = float(input("Enter service provider rate multiplier: "))
@@ -101,6 +101,25 @@ def menu():
            else:
               print("Invalid service type selected")
               continue
+           
+        
+        elif choice == '4':
+           client_name = input("Filter for clients whose name starts with (leave blank for all):").strip().lower()
+           filtered_clients = [client for client in all_clients if client.name.startswith(client_name)]if client_name else all_clients
+           if not filtered_clients:
+              print("No clients found with that name.")
+           else: 
+              for index, client in enumerate(filtered_clients, start=1):
+                print(f"\033[1;32m'{index}. {client}'\033[0m")
+              
+              client_for_booking_index = int(input("Select client by number: ")) - 1
+              if 0 <= client_for_booking_index < len(filtered_clients):
+                 client_for_booking = filtered_clients[client_for_booking_index]
+
+              else:
+                 print("Invalid selection.")
+                 continue
+           
             
         elif choice == '8':
           all_clients = load_clients_csv('clients.csv')
