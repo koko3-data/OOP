@@ -11,8 +11,15 @@ class Service:
         return self.base_price
     
     def __str__(self):
-        return f"Name: {self.name} , Duration: {self.duration_min}min , Price_Quote: {self.price_quote()} {self.currency}" 
+        return f"Name: {self.name} , Duration: {self.duration_min}min , Base_Price: {self.base_price} {self.currency}" 
     
+    def to_csv(self):
+        return [self.name, self.duration_min, self.base_price]
+    
+    @classmethod
+    def from_csv(cls, row):
+        name, duration_min, base_price = row
+        return cls(name, int(duration_min), float(base_price))
 
 class HaircutService(Service):
     def __init__(self, name: str, duration_min: int, base_price: float, long_hair: bool = False):

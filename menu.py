@@ -1,13 +1,15 @@
 from Person import Client, ServiceProvider
 from Service import Service,ManicureService,HaircutService,MassageService,TherapyService
-from save import load_clients_csv, save_clients_csv
+from save import load_clients_csv, save_clients_csv, load_providers_csv, save_providers_csv ,load_services_csv, save_services_csv 
 all_clients = []
 all_providers = []
 all_services = []
 
 def menu():
-    global all_clients, all_providers, all_services
-    all_clients = load_clients_csv('clients.csv')  
+    
+    all_clients = load_clients_csv('clients.csv') 
+    all_providers = load_providers_csv('providers.csv') 
+    all_services = load_services_csv('services.csv')
     while True:
         print("Welcome to SaloonBooker!")
         print("1. Add client : ")
@@ -30,11 +32,10 @@ def menu():
 
          client = Client(name, phone, wallet)
          all_clients.append(client)
-         for client in all_clients:
-          save_clients_csv(client, 'clients.csv')
-          print(f"\033[1;32m' {client} '\033[0m")
+         save_clients_csv(client, 'clients.csv')
+         print(f"\033[1;32m' {client} '\033[0m")
          
-         # save_clients_csv(client, 'clients.csv')
+     
          
 
         elif choice == '2':
@@ -45,8 +46,8 @@ def menu():
 
             provider = ServiceProvider(name, phone, speciality, rate_multiplier)
             all_providers.append(provider)
-            for provider in all_providers:
-             print(f"\033[1;34m' {provider} '\033[0m")
+            save_providers_csv(provider,'providers.csv')
+            print(f"\033[1;34m' {provider} '\033[0m")
            
             
         
@@ -64,8 +65,8 @@ def menu():
               base_price = float(input("Enter service base price: "))
               service = HaircutService(name, duration_min, base_price, long_hair)
               all_services.append(service)
-              for service in all_services:
-               print(f"\033[1;35m' {service} '\033[0m")
+              save_services_csv(service,'services.csv')
+              print(f"\033[1;35m' {service} '\033[0m")
            
            elif service_type == '2':
               gel = input("Does it include gel? (yes/no): ").strip().lower() == 'yes'
@@ -74,8 +75,9 @@ def menu():
               base_price = float(input("Enter service base price: "))
               service = ManicureService(name, duration_min, base_price, gel)
               all_services.append(service)
-              for service in all_services:
-               print(f"\033[1;35m' {service} '\033[0m")
+              save_services_csv(service,'services.csv')
+              print(f"\033[1;35m' {service} '\033[0m")
+              
 
            elif service_type == '3':
              deep_tissue = input("Is it a deep tissue massage? (yes/no): ").strip().lower() == 'yes'
@@ -84,8 +86,8 @@ def menu():
              base_price = float(input("Enter service base price: "))
              service = MassageService(name, duration_min, base_price, deep_tissue)
              all_services.append(service)
-             for service in all_services:
-               print(f"\033[1;35m' {service} '\033[0m")
+             save_services_csv(service,'services.csv')
+             print(f"\033[1;35m' {service} '\033[0m")
 
            elif service_type == '4':
               name = "Therapy Service"  
@@ -93,8 +95,8 @@ def menu():
               base_price = float(input("Enter service base price: "))
               service = TherapyService(name, duration_min, base_price)
               all_services.append(service)
-              for service in all_services:
-               print(f"\033[1;35m' {service} '\033[0m")
+              save_services_csv(service,'services.csv')
+              print(f"\033[1;35m' {service} '\033[0m")
 
            else:
               print("Invalid service type selected")
@@ -104,6 +106,18 @@ def menu():
           all_clients = load_clients_csv('clients.csv')
           for client in all_clients:
             print(f"\033[1;35m{client}\033[0m")
+
+             
+        elif choice == '9':
+          all_providers= load_providers_csv('providers.csv')
+          for provider in all_providers:
+            print(f"\033[1;35m{provider}\033[0m")
+
+        elif choice == '10':
+          all_services= load_services_csv('services.csv')
+          for service in all_services:
+            print(f"\033[1;35m{service}\033[0m")
+         
          
 
         elif choice == '11':
