@@ -1,9 +1,11 @@
 from Person import Client, ServiceProvider
+from Booking import Booking
 from Service import Service,ManicureService,HaircutService,MassageService,TherapyService
 from save import load_clients_csv, save_clients_csv, load_providers_csv, save_providers_csv ,load_services_csv, save_services_csv 
 all_clients = []
 all_providers = []
 all_services = []
+all_bookings = []
 
 def menu():
     
@@ -119,8 +121,42 @@ def menu():
               else:
                  print("Invalid selection.")
                  continue
-           
-            
+           time_slot = input("Enter Date and Time for booking (e.g., 2023-10-01 14:00): ")
+           provider_name = input("Filter for service providers whose name starts with (leave blank for all):").strip().lower()
+           filtered_providers = [provider for provider in all_providers if provider.name.startswith(provider_name)]if provider_name else all_providers
+           if not filtered_providers:
+              print("No Providers found with that name.")
+           else: 
+              for index, provider in enumerate(filtered_providers, start=1):
+                print(f"\033[1;32m'{index}. {provider}'\033[0m")
+              
+              provider_for_booking_index = int(input("Select provider by number: ")) - 1
+              if 0 <= provider_for_booking_index < len(filtered_providers):
+                 provider_for_booking = filtered_providers[provider_for_booking_index]
+
+              else:
+                 print("Invalid selection.")
+                 continue
+              
+           service_name = input("Filter for service providers whose name starts with (leave blank for all):").strip().lower()
+           filtered_services = [service for service in all_services if service.name.startswith(service_name)]if service_name else all_services
+           if not filtered_services:
+              print("No Services found with that name.")
+           else: 
+              for index, service in enumerate(filtered_services, start=1):
+                print(f"\033[1;32m'{index}. {service}'\033[0m")
+              
+              service_for_booking_index = int(input("Select provider by number: ")) - 1
+              if 0 <= service_for_booking_index < len(filtered_services):
+                 service_for_booking = filtered_services[service_for_booking_index]
+
+              else:
+                 print("Invalid selection.")
+                 continue
+              booking = Booking(client_for_booking, provider_for_booking, service_for_booking, time_slot)
+              all_bookings.append(booking)
+              print(f"\033[1;33m' {booking} '\033[0m")
+        
         elif choice == '8':
           all_clients = load_clients_csv('clients.csv')
           for client in all_clients:
