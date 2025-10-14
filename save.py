@@ -71,16 +71,16 @@ def load_services_csv(service,filename = 'services.csv'):
             reader = csv.reader(file)
             next(reader)  # Skip header row
             for row in reader:
-                if 'Name' in row == "Haircut Service":
+                if row[0] == "Haircut Service":
                    service = HaircutService.from_csv(row)
                    services.append(service)
-                elif 'Name' in row == "Manicure Service":
+                elif row[0] == "Manicure Service":
                    service = ManicureService.from_csv(row)
                    services.append(service)
-                elif 'Name' in row == "Massage Service":
+                elif row[0] == "Massage Service":
                    service = MassageService.from_csv(row)
                    services.append(service)
-                elif 'Name' in row == "Therapy Service":
+                elif row[0] == "Therapy Service":
                    service = TherapyService.from_csv(row)
                    services.append(service)
         
