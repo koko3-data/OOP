@@ -1,7 +1,7 @@
 from Person import Client, ServiceProvider
 from Booking import Booking
 from Service import Service,ManicureService,HaircutService,MassageService,TherapyService
-from save import load_clients_csv, save_clients_csv, load_providers_csv, save_providers_csv ,load_services_csv, save_services_csv 
+from save import load_clients_csv, save_clients_csv, load_providers_csv, save_providers_csv ,load_services_csv, save_services_csv, load_bookings_csv, save_bookings_csv   
 all_clients = []
 all_providers = []
 all_services = []
@@ -12,6 +12,7 @@ def menu():
     all_clients = load_clients_csv('clients.csv') 
     all_providers = load_providers_csv('providers.csv') 
     all_services = load_services_csv('services.csv')
+    all_bookings = load_bookings_csv('bookings.csv')
     while True:
         print("Welcome to SaloonBooker!")
         print("1. Add client : ")
@@ -24,9 +25,10 @@ def menu():
         print("8. List all clients: ")
         print("9. List all Service Providers: ")
         print("10. List all Services")
-        print("11. Quit: ")
+        print("11. List all Bookings")
+        print("12. Quit: ")
         
-        choice = input("Enter your choice (1 - 11) : ")
+        choice = input("Enter your choice (1 - 12) : ")
         if choice == '1':
          name = input("Enter client name: ").lower()
          phone = input("Enter client phone number: ")
@@ -124,15 +126,15 @@ def menu():
            time_slot = input("Enter Date and Time for booking (e.g., 2023-10-01 14:00): ")
            source = input('Specify booking source (e.g Source:SalonBooker App(Type: "S"), Reception(Type: "R"), Phone(Type: "P"): ')
            if source == 'S':
-              source = booking.source_default
+              source = Booking.source_default
            elif source == 'R':
               source = "Reception"
            elif source == 'P':
               source = "Phone"
-           elif source == '':
-              source = booking.source_default
+           elif source == source:
+              source = Booking.source_default
            else:
-              source = booking.source_default
+              source = Booking.source_default
         
            provider_name = input("Filter for service providers whose name starts with (leave blank for all):").strip()
            filtered_providers = [provider for provider in all_providers if provider.name.startswith(provider_name)]if provider_name else all_providers
@@ -165,9 +167,10 @@ def menu():
               else:
                  print("Invalid selection.")
                  continue
-              booking = Booking(client_for_booking, provider_for_booking, service_for_booking, time_slot, source)
-              all_bookings.append(booking)
-              print(f"\033[1;33m' {booking} '\033[0m")
+           booking = Booking(client_for_booking, provider_for_booking, service_for_booking, time_slot, source)
+           all_bookings.append(booking)
+           save_bookings_csv(booking, 'bookings.csv')
+           print(f"\033[1;33m' {booking} '\033[0m")
         
         elif choice == '8':
           all_clients = load_clients_csv('clients.csv')
@@ -184,12 +187,15 @@ def menu():
           all_services= load_services_csv('services.csv')
           for service in all_services:
             print(f"\033[1;35m{service}\033[0m")
-         
         
-
         elif choice == '11':
-            print("Thank you for using SaloonBooker. Goodbye!")
-            break
+           all_bookings = load_bookings_csv('bookings.csv')
+           for booking in all_bookings:
+              print(f"\033[1;35m{booking}\033[0m")
+        
+        elif choice == '12':
+          print("Thank you for using SaloonBooker. Goodbye!")
+          break
           
               
               

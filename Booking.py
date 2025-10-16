@@ -14,10 +14,10 @@ class Booking:
         self.source = source if source else self.source_default
     
     def __str__(self):
-        return f"Booking(Client: {self.client.name}, Provider: {self.provider.name}, Service: {self.service.name}, Timeslot: {self.timeslot}, Source: {self.source}"
+        return f"Booking(Client: {self.client}, Provider: {self.provider}, Service: {self.service}, Timeslot: {self.timeslot}, Source: {self.source}"
     
     def to_csv(self):
-        return [self.client.name, self.provider.name, self.service.name, self.timeslot, self.source ]
+        return [self.client, self.provider, self.service, self.timeslot, self.source ]
     
     @classmethod
     def from_csv(cls, row):
