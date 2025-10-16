@@ -4,6 +4,7 @@ import os
 import csv
 
 from Service import HaircutService, ManicureService, MassageService, TherapyService
+from Booking import Booking
 
 def save_clients_csv(client,filename = 'clients.csv'):
     file_exists  = os.path.exists(filename)
@@ -87,3 +88,27 @@ def load_services_csv(service,filename = 'services.csv'):
     except FileNotFoundError:
         print(f"No existing file named {filename} found. Starting with an empty client list.")
     return services
+
+def save_bookings_csv(booking,filename = 'bookings.csv'):
+    file_exists  = os.path.exists(filename)
+    with open(filename, mode='a', newline='') as file:
+        writer = csv.writer(file)
+
+        if not file_exists:
+            writer.writerow(['Client', 'Provider', 'Service','Timeslot','Source'])  # Header row
+            writer.writerow(booking.to_csv())
+        else:
+            writer.writerow(booking.to_csv())
+
+def load_bookings_csv(booking,filename = 'bookings.csv'):
+    bookings = []
+    try:
+        with open(filename, mode='r',newline= '') as file:
+            reader = csv.reader(file)
+            next(reader)  # Skip header row
+            for row in reader:
+                booking = Booking.from_csv(row)
+                bookings.append(booking)
+    except FileNotFoundError:
+        print(f"No existing file named {filename} found. Starting with an empty client list.")
+    return bookings

@@ -106,7 +106,7 @@ def menu():
            
         
         elif choice == '4':
-           client_name = input("Filter for clients whose name starts with (leave blank for all):").strip().lower()
+           client_name = input("Filter for clients whose name starts with (leave blank for all):").strip()
            filtered_clients = [client for client in all_clients if client.name.startswith(client_name)]if client_name else all_clients
            if not filtered_clients:
               print("No clients found with that name.")
@@ -122,7 +122,19 @@ def menu():
                  print("Invalid selection.")
                  continue
            time_slot = input("Enter Date and Time for booking (e.g., 2023-10-01 14:00): ")
-           provider_name = input("Filter for service providers whose name starts with (leave blank for all):").strip().lower()
+           source = input('Specify booking source (e.g Source:SalonBooker App(Type: "S"), Reception(Type: "R"), Phone(Type: "P"): ')
+           if source == 'S':
+              source = booking.source_default
+           elif source == 'R':
+              source = "Reception"
+           elif source == 'P':
+              source = "Phone"
+           elif source == '':
+              source = booking.source_default
+           else:
+              source = booking.source_default
+        
+           provider_name = input("Filter for service providers whose name starts with (leave blank for all):").strip()
            filtered_providers = [provider for provider in all_providers if provider.name.startswith(provider_name)]if provider_name else all_providers
            if not filtered_providers:
               print("No Providers found with that name.")
@@ -138,7 +150,7 @@ def menu():
                  print("Invalid selection.")
                  continue
               
-           service_name = input("Filter for service providers whose name starts with (leave blank for all):").strip().lower()
+           service_name = input("Filter for services whose name starts with (leave blank for all):").strip()
            filtered_services = [service for service in all_services if service.name.startswith(service_name)]if service_name else all_services
            if not filtered_services:
               print("No Services found with that name.")
@@ -153,7 +165,7 @@ def menu():
               else:
                  print("Invalid selection.")
                  continue
-              booking = Booking(client_for_booking, provider_for_booking, service_for_booking, time_slot)
+              booking = Booking(client_for_booking, provider_for_booking, service_for_booking, time_slot, source)
               all_bookings.append(booking)
               print(f"\033[1;33m' {booking} '\033[0m")
         
@@ -173,7 +185,7 @@ def menu():
           for service in all_services:
             print(f"\033[1;35m{service}\033[0m")
          
-         
+        
 
         elif choice == '11':
             print("Thank you for using SaloonBooker. Goodbye!")

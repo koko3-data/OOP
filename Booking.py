@@ -1,5 +1,6 @@
 from Person import Client, ServiceProvider
 from Service import Service
+from datetime import datetime
 
 
 class Booking:
@@ -11,6 +12,18 @@ class Booking:
         self.service = service
         self.timeslot = timeslot
         self.source = source if source else self.source_default
+    
+    def __str__(self):
+        return f"Booking(Client: {self.client.name}, Provider: {self.provider.name}, Service: {self.service.name}, Timeslot: {self.timeslot}, Source: {self.source}"
+    
+    def to_csv(self):
+        return [self.client.name, self.provider.name, self.service.name, self.timeslot, self.source ]
+    
+    @classmethod
+    def from_csv(cls, row):
+        client, provider ,service, timeslot, source = row
+        timeslot = datetime.strptime(timeslot, "%Y-%m-%d %H:%M")
+        return cls(client, provider, service, timeslot, source)
         
 
     def total_price(self):
