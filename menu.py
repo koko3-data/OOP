@@ -63,11 +63,16 @@ def menu():
            print("4. Therapy Service")
            service_type = input("Enter your choice (1-4): ")
            if service_type == '1':
-              long_hair = input("Is it for long hair? (yes/no): ").strip().lower() == 'yes'
+              long_hair_quest = input("Is it for long hair? (yes/no): ").strip().lower()
+              #Create a service instance so you can call the method on the instance not the class
+              haircut_service = HaircutService()
+              if long_hair_quest == 'yes':
+                 haircut_service.long_hair = True
+              
               name = "Haircut Service"
               duration_min = int(input("Enter service duration in minutes: "))
               base_price = float(input("Enter service base price: "))
-              service = HaircutService(name, duration_min, base_price, long_hair)
+              service = HaircutService(name, duration_min, base_price, long_hair_quest)
               all_services.append(service)
               save_services_csv(service,'services.csv')
               print(f"\033[1;35m' {service} '\033[0m")
@@ -171,6 +176,20 @@ def menu():
            all_bookings.append(booking)
            save_bookings_csv(booking, 'bookings.csv')
            print(f"\033[1;33m' {booking} '\033[0m")
+
+        elif choice == '5':
+            if not all_bookings:
+              print("No Bookings available.")
+            else: 
+              for index, booking in enumerate(all_bookings, start=1):
+                print(f"\033[1;32m'{index}. {booking}'\033[0m")
+              booking_index = int(input('Select booking by number to confirm: ')) - 1
+              if 0 <= booking_index < len(all_bookings):
+                 booking_to_confirm = all_bookings[booking_index]
+                 booking_to_confirm.confirm_booking()
+                 
+
+           
         
         elif choice == '8':
           all_clients = load_clients_csv('clients.csv')

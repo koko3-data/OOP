@@ -42,14 +42,14 @@ class Booking:
 
 
     def confirm_booking(self):
-       user_input = input(f"Will you like to pay for {self.service.name} with {self.provider.name} now ? (yes/no): ").strip().lower()
+       user_input = input(f"Will you like to pay for {self.service} with {self.provider} now ? (yes/no): ").strip().lower()
        if user_input == 'yes':
           
            if self.pay(self.total_price()) == True:
                self.confirmed = True
                if self not in Booking.all_bookings: #aviod duplicates appending
                 Booking.all_bookings.append(self)
-                print (f"Booking confirmed: {self.service.name} with {self.provider.name} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source}.")
+                print (f"Booking confirmed: {self.service} with {self.provider} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source}.")
                 return True
            else:
                 self.confirmed = False
@@ -59,7 +59,7 @@ class Booking:
             self.confirmed = True
             if self not in Booking.all_bookings: #aviod duplicates appending
                 Booking.all_bookings.append(self)
-                print (f"Booked {self.service.name} with {self.provider.name} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source} without payment.")
+                print (f"Booked {self.service} with {self.provider} at {self.timeslot} for {self.total_price()} {self.service.currency} via {self.source} without payment.")
                 return True
     
     
