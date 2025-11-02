@@ -2,3 +2,5 @@ Client,Provider,Service,Timeslot,Source
 Zion,Staracakes,Massage Service,2025-10-25 12:00,SalonBooker
 Lola,MV_Hairstyle,Therapy Service,2025-11-30 14:00,SalonBooker
 Grace,MV_Hairstyle,Haircut Service,2025-12-03 15:00,Reception
+Lola,Krakow_Hair,Massage Service,222,SalonBooker
+"Name: Lola ,Phone: (904567), Wallet:100.0","Name: Krakow_Hair ,Phone: ((48)2346790),Speciality: Hair,Makeup","Name: Therapy Service , Duration: 90min , Base_Price: 70.0 PLN",333,SalonBooker

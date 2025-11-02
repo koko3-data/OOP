@@ -63,16 +63,11 @@ def menu():
            print("4. Therapy Service")
            service_type = input("Enter your choice (1-4): ")
            if service_type == '1':
-              long_hair_quest = input("Is it for long hair? (yes/no): ").strip().lower()
-              #Create a service instance so you can call the method on the instance not the class
-              haircut_service = HaircutService()
-              if long_hair_quest == 'yes':
-                 haircut_service.long_hair = True
-              
+              long_hair = input("Does it include gel? (yes/no): ").strip().lower() == 'yes'
               name = "Haircut Service"
               duration_min = int(input("Enter service duration in minutes: "))
               base_price = float(input("Enter service base price: "))
-              service = HaircutService(name, duration_min, base_price, long_hair_quest)
+              service = HaircutService(name, duration_min, base_price, long_hair)
               all_services.append(service)
               save_services_csv(service,'services.csv')
               print(f"\033[1;35m' {service} '\033[0m")
