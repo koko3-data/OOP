@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Page</title>
+</head>
+<body>
+    {%if error %}
+        <p style = "color :red;">{{error}}</p>
+    {% endif %}
+    <form method="POST">
+        <label>First Name:</label>
+        <input type="text" name="first_name" required><br><br>
+
+        <label>Last Name:</label>
+        <input type="text" name="last_name" required><br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" required><br><br>
+
+        <label>Phone:</label>
+        <input type="text" name="phone" required><br><br>
+
+        <label>Role:</label>
+        <select name="role" required>
+            <option value="client">Client</option>
+            <option value="service_provider">Service Provider</option>
+        </select><br><br>
+       
+        <label>Username:</label>
+        <input type="text" name="username" required><br><br>
+
+        <label>Password:</label>
+        <input type ="password" name="password" required><br><br>
+
+        <label>Confirm Password:</label>
+        <input type ="password" name="confirm_password" required><br><br>
+
+        <input type ="submit" value="Register">
+
+
+
+    </form>
+</body>
+
+</html>
