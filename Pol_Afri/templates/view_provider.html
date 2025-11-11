@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Providers Dashboard</title>
+<body>
+    <h1>View Providers</h1>
+    <p><a href="/admin">Back to Admin Dashboard</a></p>
+    <p><a href="/add_provider">Add Provider</a></p>
+
+    <!--To seperate sections with horizontal lines-->
+    <hr>
+    {% if providers %}
+        <table border="1" cellpadding="10">
+            <tr>
+                <th>User_ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Username</th>
+            </tr>
+            {% for provider in providers %}
+            <tr>
+                <td>{{ provider.user_id }}</td>
+                <td>{{ provider.first_name }}</td>
+                <td>{{ provider.last_name }}</td>
+                <td>{{ provider.email }}</td>
+                <td>{{ provider.username }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" align="center">No clients found.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No clients available.</p>
+    {% endif %}
+</body>
+</html>

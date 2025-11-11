@@ -133,6 +133,24 @@ def client_dashboard():
 def service_provider_dashboard():
     return render_template('service_provider.html')
 
+@app.route('/add_provider', methods=['GET', 'POST'])
+def add_provider():
+    return (redirect(url_for('register')))
+
+@app.route('/add_client', methods=['GET', 'POST'])
+def add_client():
+    return (redirect(url_for('register')))
+
+@app.route('/view_provider')
+def view_provider():
+    providers = ServiceProvider.query.all()
+    return render_template('view_provider.html', providers=providers)
+
+@app.route('/view_client')
+def view_client():
+    clients = Client.query.all()
+    return render_template('view_client.html', clients=clients)
+
 #To run the app
 if __name__ == "__main__":
     app.run(debug=True)

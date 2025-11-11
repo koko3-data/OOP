@@ -1,14 +1,50 @@
 <!DOCTYPE html>
 <html>    
 <head>
+    <meta charset="UTF-8"> <!-- Ensure proper character encoding -->
     <title>Admin Dashboard</title>
+    <style>
+        ul , li {margin: 0; padding: 0;} <!--Removes extra margin and padding caused by browser-->
+        ul {list-style-type:none; padding: 0;}
+        .submenu {display: none; margin-left: 20px;color:blue}
+        .menu-item {cursor: pointer;color: blue; user-select: none;font-weight:bold;font-size: 1.1em;}
+        .toggle-icon {margin-right: 5px; display:inline-block;}
+    </style>
 </head>
 <body>
     <h1>Admin</h1>
     <ul>
         <li><a href="/user_profile">User Profile</a></li>
-        <li><a href="/manage-users">Manage Users</a></li>
+        <li class="menu-item" onclick="toggleMenu('ProviderMenu',this)">
+            <span class="toggle-icon">+</span>Manage Providers
+        </li>
+        <ul id="ProviderMenu" class="submenu">
+            <li><a href="{{ url_for('register') }}">Add Provider</a></li>
+            <li><a href="{{ url_for('view_provider') }}">View Provider</a></li>
+           
+        </ul>
+        <li class="menu-item" onclick="toggleMenu('ClientMenu',this)">
+            <span class="toggle-icon">+</span>Manage Clients
+        </li>
+        <ul id="ClientMenu" class="submenu">
+            <li><a href="{{ url_for('register') }}">Add Clients</a></li>
+            <li><a href="{{ url_for('view_client') }}">View Clients</a></li>
+          
+        </ul>
         <li><a href="/settings">Manage System Settings</a></li>
     </ul>
+   <script>
+        function toggleMenu(id, element) {
+            const submenu = document.getElementById(id);
+            const icon = element.querySelector('.toggle-icon');
+            if (submenu.style.display === 'block') {
+                submenu.style.display = 'none';
+                icon.textContent = '+';
+            } else {
+                submenu.style.display = 'block';
+                icon.textContent = '−';
+            }
+        }
+    </script>
 </body>
 </html>
