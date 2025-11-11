@@ -17,23 +17,32 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Username</th>
+                <th>Business Name</th>
+                <th>Speciality</th>
+                <th>Location</th>
+               
+
             </tr>
             {% for provider in providers %}
             <tr>
                 <td>{{ provider.user_id }}</td>
-                <td>{{ provider.first_name }}</td>
-                <td>{{ provider.last_name }}</td>
-                <td>{{ provider.email }}</td>
-                <td>{{ provider.username }}</td>
+                <td>{{ provider.user.first_name }}</td>
+                <td>{{ provider.user.last_name }}</td>
+                <td>{{ provider.user.email }}</td>
+                <td>{{ provider.user.username }}</td>
+                <td>{{ provider.business_name }}</td>
+                <td>{{ provider.speciality }}</td>
+                <td>{{ provider.location }}</td>
+                
             </tr>
             {% else %}
             <tr>
-                <td colspan="5" align="center">No clients found.</td>
+                <td colspan="8" align="center">No providers found.</td>
             </tr>
             {% endfor %}
         </table>
     {% else %}
-        <p>No clients available.</p>
+        <p>No providers available.</p>
     {% endif %}
 </body>
 </html>

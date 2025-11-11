@@ -17,18 +17,21 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Username</th>
+                <th>Wallet</th>
+
             </tr>
             {% for client in clients %}
             <tr>
                 <td>{{ client.user_id }}</td>
-                <td>{{ client.first_name }}</td>
-                <td>{{ client.last_name }}</td>
-                <td>{{ client.email }}</td>
-                <td>{{ client.username }}</td>
+                <td>{{ client.user.first_name }}</td>
+                <td>{{ client.user.last_name }}</td>
+                <td>{{ client.user.email }}</td>
+                <td>{{ client.user.username }}</td>
+                <td>{{ client.wallet }}</td>
             </tr>
             {% else %}
             <tr>
-                <td colspan="5" align="center">No clients found.</td>
+                <td colspan="6" align="center">No clients found.</td>
             </tr>
             {% endfor %}
         </table>
