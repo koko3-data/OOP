@@ -1,5 +1,5 @@
 class Car:
-    unit_of_measurement = "km/l"
+
     def __init__(self, make, model, year,fuel_consumption: float,distance: float,car_age:int):
         self.make = make
         self.model = model
